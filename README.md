@@ -1,6 +1,6 @@
 ## Kaggle Mercai Price Suggestion Challenge! 
 
-This project depends on the Mercari dataset available at: https://labrosa.ee.columbia.edu/millionsong/
+This project focuses on the price suggestion challenge posted by Mercari on Kaggle: https://www.kaggle.com/c/mercari-price-suggestion-challenge
 
 
 Contributers: Aumit Leon, Mariana Echeverria
