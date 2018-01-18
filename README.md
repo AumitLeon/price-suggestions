@@ -8,7 +8,7 @@ Contributers: Aumit Leon, Mariana Echeverria
 ### Getting Started
 Download the dataset from https://www.kaggle.com/c/mercari-price-suggestion-challenge/data (train.tsv.7z)
 
-####Decompressing the Data (MAC): 
+#### Decompressing the Data (MAC): 
 Update brew
 ```
 brew update
