@@ -1,0 +1,37 @@
+Mercari Competition
+
+To do list
+===========
+
+1. Preprocess data
+   --------------------------------------------------------------------
+    a. get rid of:
+      - punctuation:
+          remove it only if there is a space after the punctuation mark
+          (last character in a string)
+      - capitalization
+      - split words with {-, /}
+      - useless words
+    b. add categories:
+      - they will be considered a single string --
+        e.g. Women/Tops/Vest will be a single entry in the vectors
+    c. ignore misspellings
+    d. add names to those items that don't have descriptions
+   --------------------------------------------------------------------
+
+
+2. Algorithm -- F-u-N s-T-u-F-f!!:
+   --------------------------------------------------------------------
+    a. SVM
+    b. NO neural nets :)
+    c. GBM
+    d. k-Means (price ranges?) -- get smaller subsets of data
+    e. try multiple algorithms together (BOOM)
+    f. NN after clustering ...
+   --------------------------------------------------------------------
+
+
+To check later
+===============
+  * wordbatch
+  * gbm
