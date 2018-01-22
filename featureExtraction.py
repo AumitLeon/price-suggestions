@@ -29,11 +29,23 @@ def readFile(filename):
 
     return df, item_description, item_name, category_name, brand_name, shipping
 
-"Currently removes unnecessary punctuation"
-def preProcess(item_descript, df):
-
+"""Fill in names for as descriptions for items with no descriptions. """
+def cleanDescriptions(item_descript, item_name):
+    count = 0
+    for t in range(len(item_descript)):
+        if item_descript[t] == "No description yet":
+            item_descript[t] = item_name[t]
+    return item_descript
+    #print count
+        
+"""Currently removes unnecessary punctuation"""
+def preProcess(item_descript, item_name, df):
+    
     df['rev'] = df['item_description'].astype(str)
-    temp_descript = df['rev'].tolist()
+    raw_descript = df['rev'].tolist()
+
+    # Fill in item name for items with no description yet
+    temp_descript = cleanDescriptions(raw_descript, item_name)
     final_list = []
 
     # For every item description
@@ -62,9 +74,10 @@ def preProcess(item_descript, df):
 if __name__ == "__main__":
     filename = "/mnt/c/Users/Aumit/Documents/GitHub/kaggle-mercari/train.csv"
     df, item_des, item_name, cat_name, brand_name, shipping  = readFile(filename)
-    fin_list = preProcess(item_des, df)
+    fin_list = preProcess(item_des, item_name, df)
 
     # Verify that puncuation was properly removed.
     for y in range(10):
         print fin_list[y]
 
+    #cleanDescriptions(item_des, item_name)
