@@ -42,7 +42,9 @@ def preProcess(item_descript, df):
         # Split by space
         temp_helper = temp_descript[i].split()
         for u in range(len(temp_helper)):
-
+            
+            # Turn every word to lower case. 
+            temp_helper[u] = temp_helper[u].lower()                
             # If the last char in a word is punctuation
             if temp_helper[u][-1:] in invalidChars:
                word = temp_helper[u][:-1]
