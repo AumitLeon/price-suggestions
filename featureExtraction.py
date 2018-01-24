@@ -21,11 +21,11 @@ def readFile(filename):
 
     # Verify the lengthts of the lists
     # Each list is of length 1482535! 
-    print len(item_description)
-    print len(item_name)
-    print len(category_name)
-    print len(brand_name)
-    print len(shipping)
+    #print len(item_description)
+    #print len(item_name)
+    #print len(category_name)
+    #print len(brand_name)
+    #print len(shipping)
 
     return df, item_description, item_name, category_name, brand_name, shipping
 
@@ -87,6 +87,24 @@ def preProcess(item_descript, item_name, df):
 
     return final_list
 
+def getMostFrequentWords (final_list):
+    words = {}
+    for sentence in final_list:
+        for word in sentence:
+            if word not in words:
+                words[word] = 1
+            elif word in words:
+                words[word] += 1
+    del words[""]
+    # Sort word list
+    freq_words = sorted(words, key = words.get, reverse = True)
+
+    # Get most frequent words
+    top_thousands = freq_words[:1000]   
+
+    for item in top_thousands:
+        print item 
+
 
 
 
@@ -95,8 +113,9 @@ if __name__ == "__main__":
     df, item_des, item_name, cat_name, brand_name, shipping  = readFile(filename)
     fin_list = preProcess(item_des, item_name, df)
 
+    getMostFrequentWords(fin_list)
     # Verify that puncuation was properly removed.
-    for y in range(10):
-        print fin_list[y]
+    #for y in range(10):
+     #   print fin_list[y]
 
     #cleanDescriptions(item_des, item_name)
