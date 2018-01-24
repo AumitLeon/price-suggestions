@@ -47,6 +47,7 @@ def preProcess(item_descript, item_name, df):
     # Fill in item name for items with no description yet
     temp_descript = cleanDescriptions(raw_descript, item_name)
     final_list = []
+    foundChar = False
 
     # For every item description
     for i in range(len(temp_descript)):
@@ -54,15 +55,33 @@ def preProcess(item_descript, item_name, df):
         # Split by space
         temp_helper = temp_descript[i].split()
         for u in range(len(temp_helper)):
-            
+            split_words = []
             # Turn every word to lower case. 
             temp_helper[u] = temp_helper[u].lower()                
             # If the last char in a word is punctuation
             if temp_helper[u][-1:] in invalidChars:
                word = temp_helper[u][:-1]
                temp_helper[u] = word       
-            else:
-                continue
+           # elif temp_helper[u][-1:] not in invalidChars:
+           #     continue
+
+           # Split words with - or /
+            if "-" in temp_helper[u]:
+                comboWord = temp_helper[u].split("-")
+                foundChar = True
+            elif "/" in temp_helper[u]:
+                comboWord = temp_helper[u].split("/")
+                foundChar = True
+            
+            if foundChar:
+                foundChar = False
+                # Remove the original entry 
+                del temp_helper[u]
+                # Append the splits to the end of that entry
+                for part in comboWord:
+                    temp_helper.append(part)
+                comboWord = []
+
 
         final_list.append(temp_helper)
 
