@@ -17,6 +17,9 @@ To do list
         e.g. Women/Tops/Vest will be a single entry in the vectors
     c. ignore misspellings
     d. add names to those items that don't have descriptions
+    e. remove stop words
+    g. stemming?
+    f. create feature/example matrix
    --------------------------------------------------------------------
 
 
