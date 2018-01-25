@@ -93,7 +93,7 @@ def getMostFrequentWords (final_list):
         for word in sentence:
             if word not in words:
                 words[word] = 1
-            elif word in words:
+            else:
                 words[word] += 1
     del words[""]
     # Sort word list
@@ -104,9 +104,6 @@ def getMostFrequentWords (final_list):
 
     for item in top_thousands:
         print item 
-
-
-
 
 if __name__ == "__main__":
     filename = "/mnt/c/Users/Aumit/Documents/GitHub/kaggle-mercari/train.csv"
