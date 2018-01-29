@@ -105,12 +105,28 @@ def getMostFrequentWords (final_list):
     for item in top_thousands:
         print item 
 
+# Get a count of the category types
+def countCategories (cat_name):
+    categories = {}
+    for item in cat_name:
+        if item not in categories:
+            categories[item] = 1
+        else:
+            categories[item] += 1
+    
+    for thing in categories:
+        print str(thing) + " ---------------------- " + str(categories[thing])
+    #print categories
+
 if __name__ == "__main__":
     filename = "/mnt/c/Users/Aumit/Documents/GitHub/kaggle-mercari/train.csv"
     df, item_des, item_name, cat_name, brand_name, shipping  = readFile(filename)
     fin_list = preProcess(item_des, item_name, df)
 
-    getMostFrequentWords(fin_list)
+    countCategories(cat_name)
+
+   # getMostFrequentWords(fin_list)
+   
     # Verify that puncuation was properly removed.
     #for y in range(10):
      #   print fin_list[y]
