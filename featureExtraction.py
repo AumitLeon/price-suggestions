@@ -17,6 +17,7 @@ def readFile(filename):
     category_name = df['category_name'].tolist()
     brand_name = df['brand_name'].tolist()
     shipping = df['shipping'].tolist()
+    item_conds = df['item_condition_id'].tolist()
     #print item_description
 
     # Verify the lengthts of the lists
@@ -27,7 +28,7 @@ def readFile(filename):
     #print len(brand_name)
     #print len(shipping)
 
-    return df, item_description, item_name, category_name, brand_name, shipping
+    return df, item_description, item_name, category_name, brand_name, shipping, item_conds
 
 """Fill in names for as descriptions for items with no descriptions. """
 def cleanDescriptions(item_descript, item_name):
@@ -100,10 +101,11 @@ def getMostFrequentWords (final_list):
     freq_words = sorted(words, key = words.get, reverse = True)
 
     # Get most frequent words
-    top_thousands = freq_words[:1000]   
+    top_thousands = freq_words[:5000]   
 
-    for item in top_thousands:
-        print item 
+    return top_thousands
+    #for item in top_thousands:
+     #   print item 
 
 # Get a count of the category types
 def countCategories (cat_name):
@@ -118,14 +120,57 @@ def countCategories (cat_name):
         print str(thing) + " ---------------------- " + str(categories[thing])
     #print categories
 
+def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names):
+    # Conditions
+    conds = []
+    for cond in item_condition:
+        condition_of_item = []
+        if cond == 1: 
+            for x in range(5):
+                if x == 0:
+                    condition_of_item.append(1)
+                else:
+                    condition_of_item.append(0)
+        elif cond == 2: 
+            for x in range(5):
+                if x == 1:
+                    condition_of_item.append(1)
+                else:
+                    condition_of_item.append(0)
+        elif cond == 3: 
+            for x in range(5):
+                if x == 2:
+                    condition_of_item.append(1)
+                else:
+                    condition_of_item.append(0)
+        elif cond == 4: 
+            for x in range(5):
+                if x == 3:
+                    condition_of_item.append(1)
+                else:
+                    condition_of_item.append(0)
+        elif cond == 5: 
+            for x in range(5):
+                if x == 4:
+                    condition_of_item.append(1)
+                else:
+                    condition_of_item.append(0)
+
+            
+        # append condition_of_item to corresponding training example
+        # Length should match the list
+        conds.append(condition_of_item)
+        print len(conds)
+
 if __name__ == "__main__":
     filename = "/mnt/c/Users/Aumit/Documents/GitHub/kaggle-mercari/train.csv"
-    df, item_des, item_name, cat_name, brand_name, shipping  = readFile(filename)
+    df, item_des, item_name, cat_name, brand_name, shipping, item_conds  = readFile(filename)
     fin_list = preProcess(item_des, item_name, df)
 
     countCategories(cat_name)
 
-   # getMostFrequentWords(fin_list)
+    freq_words = getMostFrequentWords(fin_list)
+    createMatrix(freq_words, cat_name, shipping, item_conds, brand_name)
    
     # Verify that puncuation was properly removed.
     #for y in range(10):
