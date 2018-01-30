@@ -40,10 +40,16 @@ def cleanDescriptions(item_descript, item_name):
     #print count
         
 """Currently removes unnecessary punctuation"""
-def preProcess(item_descript, item_name, df):
+def preProcess(item_descript, item_name, df, name, brand):
     
     df['rev'] = df['item_description'].astype(str)
     raw_descript = df['rev'].tolist()
+
+    df['temp_brand'] = df['brand_name'].astype(str)
+    raw_brand = df['temp_brand'].tolist()
+
+    df['temp_name'] = df['name'].astype(str)
+    raw_name = df['name'].astype(str)
 
     # Fill in item name for items with no description yet
     temp_descript = cleanDescriptions(raw_descript, item_name)
@@ -58,7 +64,8 @@ def preProcess(item_descript, item_name, df):
         for u in range(len(temp_helper)):
             split_words = []
             # Turn every word to lower case. 
-            temp_helper[u] = temp_helper[u].lower()                
+            temp_helper[u] = temp_helper[u].lower()
+                            
             # If the last char in a word is punctuation
             if temp_helper[u][-1:] in invalidChars:
                word = temp_helper[u][:-1]
@@ -83,6 +90,17 @@ def preProcess(item_descript, item_name, df):
                     temp_helper.append(part)
                 comboWord = []
 
+            # append name and brand
+            # assuming naming and branding is uniform 
+            # NEEDS TESTING
+            # Check if blank brands are ""
+            # Check if brand is being appended to the list properly
+            # Check if name is being appended to the list properly. 
+            if raw_brand[i] != "":
+                temp_helper.append(raw_brand[i].lower())
+            if temp_descript[i] != raw_name[i]:
+                temp_helper.append(raw_name[i].lower())
+
 
         final_list.append(temp_helper)
 
@@ -101,7 +119,7 @@ def getMostFrequentWords (final_list):
     freq_words = sorted(words, key = words.get, reverse = True)
 
     # Get most frequent words
-    top_thousands = freq_words[:5000]   
+    top_thousands = freq_words[:1000]   
 
     return top_thousands
     #for item in top_thousands:
@@ -120,7 +138,7 @@ def countCategories (cat_name):
         print str(thing) + " ---------------------- " + str(categories[thing])
     #print categories
 
-def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names):
+def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, item_des):
     # Conditions
     conds = []
     for cond in item_condition:
@@ -156,24 +174,41 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names):
                 else:
                     condition_of_item.append(0)
 
+        # Binarize item description
+        # 1 if it term is in description, 0 otherwise
+
+        descriptions = []
+        for item in item_des:
+            desc_vect = []
+            for term in freq_words:
+                if term in item:
+                    desc_vect.append(1)
+                else:
+                    desc_vect.append(0)
+            descriptions.append(desc_vect)
+
+
+
+
             
         # append condition_of_item to corresponding training example
         # Length should match the list
         conds.append(condition_of_item)
-        print len(conds)
+    print len(conds)
+    print len(descriptions)
 
 if __name__ == "__main__":
     filename = "/mnt/c/Users/Aumit/Documents/GitHub/kaggle-mercari/train.csv"
     df, item_des, item_name, cat_name, brand_name, shipping, item_conds  = readFile(filename)
-    fin_list = preProcess(item_des, item_name, df)
+    fin_list = preProcess(item_des, item_name, df, item_name, brand_name)
 
-    countCategories(cat_name)
+    #countCategories(cat_name)
 
-    freq_words = getMostFrequentWords(fin_list)
-    createMatrix(freq_words, cat_name, shipping, item_conds, brand_name)
+    #freq_words = getMostFrequentWords(fin_list)
+    #createMatrix(freq_words, cat_name, shipping, item_conds, brand_name, fin_list)
    
     # Verify that puncuation was properly removed.
-    #for y in range(10):
-     #   print fin_list[y]
+    for y in range(10):
+       print fin_list[y]
 
     #cleanDescriptions(item_des, item_name)
