@@ -204,11 +204,17 @@ if __name__ == "__main__":
 
     #countCategories(cat_name)
 
-    #freq_words = getMostFrequentWords(fin_list)
+    freq_words = getMostFrequentWords(fin_list)
     #createMatrix(freq_words, cat_name, shipping, item_conds, brand_name, fin_list)
    
     # Verify that puncuation was properly removed.
     for y in range(10):
        print fin_list[y]
+
+    print 
+    print 
+    print "Most frequent words"
+    for terms in freq_words:
+        print terms
 
     #cleanDescriptions(item_des, item_name)
