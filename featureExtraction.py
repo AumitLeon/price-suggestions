@@ -96,7 +96,7 @@ def preProcess(item_descript, item_name, df, name, brand):
             # Check if blank brands are ""
             # Check if brand is being appended to the list properly
             # Check if name is being appended to the list properly. 
-            if raw_brand[i] != "":
+            if raw_brand[i] == "":
                 temp_helper.append(raw_brand[i].lower())
             if temp_descript[i] != raw_name[i]:
                 temp_helper.append(raw_name[i].lower())
