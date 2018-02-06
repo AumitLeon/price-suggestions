@@ -212,6 +212,7 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
     #conds.append(condition_of_item)
     print len(conds)
     print len(descriptions)
+    print len(categories)
 
 if __name__ == "__main__":
     filename = "/mnt/c/Users/Aumit/Documents/GitHub/kaggle-mercari/train.csv"
