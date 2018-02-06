@@ -96,10 +96,15 @@ def preProcess(item_descript, item_name, df, name, brand):
             # Check if blank brands are ""
             # Check if brand is being appended to the list properly
             # Check if name is being appended to the list properly. 
-            if raw_brand[i] == "":
+            if raw_brand[i] != "":
                 temp_helper.append(raw_brand[i].lower())
-            if temp_descript[i] != raw_name[i]:
+            if temp_descript[i] != raw_name[i].lower():
+                #print raw_name[i].lower()
                 temp_helper.append(raw_name[i].lower())
+            if raw_brand[i] == "":
+                print raw_name[i]
+           # if temp_descript[i] == raw_name[i].lower():
+                #print temp_descript[i]
 
 
         final_list.append(temp_helper)
@@ -173,27 +178,38 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
                     condition_of_item.append(1)
                 else:
                     condition_of_item.append(0)
-
-        # Binarize item description
-        # 1 if it term is in description, 0 otherwise
-
-        descriptions = []
-        for item in item_des:
-            desc_vect = []
-            for term in freq_words:
-                if term in item:
-                    desc_vect.append(1)
-                else:
-                    desc_vect.append(0)
-            descriptions.append(desc_vect)
-
-
-
-
-            
-        # append condition_of_item to corresponding training example
-        # Length should match the list
         conds.append(condition_of_item)
+
+    # Binarize item description
+    # 1 if it term is in description, 0 otherwise
+    descriptions = []
+    for item in item_des:
+        desc_vect = []
+        for term in freq_words:
+            if term in item:
+                desc_vect.append(1)
+            else:
+                desc_vect.append(0)
+        descriptions.append(desc_vect)
+
+    # Will this just be a matrix of 1's across the diagonal?
+    # To do: parse categories to create a more useful feature space
+    cats = []
+    categories = []
+    for cat in cat_names:
+        for cat_dupe in cat_names:
+            if cat == cat_dupe:
+                cats.append(1)
+            else:
+                cats.append(0)
+        categories.append(cats)
+
+    # Need to verify the length of all lists. Then stitch them together.
+
+      
+    # append condition_of_item to corresponding training example
+    # Length should match the list
+    #conds.append(condition_of_item)
     print len(conds)
     print len(descriptions)
 
@@ -201,20 +217,22 @@ if __name__ == "__main__":
     filename = "/mnt/c/Users/Aumit/Documents/GitHub/kaggle-mercari/train.csv"
     df, item_des, item_name, cat_name, brand_name, shipping, item_conds  = readFile(filename)
     fin_list = preProcess(item_des, item_name, df, item_name, brand_name)
+    print brand_name
 
     #countCategories(cat_name)
 
-    freq_words = getMostFrequentWords(fin_list)
+    #freq_words = getMostFrequentWords(fin_list)
+    
     #createMatrix(freq_words, cat_name, shipping, item_conds, brand_name, fin_list)
    
     # Verify that puncuation was properly removed.
-    for y in range(10):
-       print fin_list[y]
+    #for y in range(10):
+      # print fin_list[y]
 
     print 
     print 
     print "Most frequent words"
-    for terms in freq_words:
-        print terms
+    #for terms in freq_words:
+     #   print terms
 
     #cleanDescriptions(item_des, item_name)
