@@ -1,4 +1,7 @@
-# AFeature Extraction for Mercari Price Suggestion Competition 
+#!/usr/bin/env python
+
+
+# Feature Extraction for Mercari Price Suggestion Competition 
 import matplotlib
 matplotlib.use('Agg')
 from matplotlib import pyplot as plt
@@ -101,8 +104,8 @@ def preProcess(item_descript, item_name, df, name, brand):
             if temp_descript[i] != raw_name[i].lower():
                 #print raw_name[i].lower()
                 temp_helper.append(raw_name[i].lower())
-            if raw_brand[i] == "":
-                print raw_name[i]
+            #if raw_brand[i] == "":
+                #print raw_name[i]
            # if temp_descript[i] == raw_name[i].lower():
                 #print temp_descript[i]
 
@@ -194,9 +197,9 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
 
     # Will this just be a matrix of 1's across the diagonal?
     # To do: parse categories to create a more useful feature space
-    cats = []
     categories = []
     for cat in cat_names:
+        cats = []
         for cat_dupe in cat_names:
             if cat == cat_dupe:
                 cats.append(1)
@@ -204,35 +207,61 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
                 cats.append(0)
         categories.append(cats)
 
+
     # Need to verify the length of all lists. Then stitch them together.
+    # Lengths verified
+    # Stitch together the matrix
+    final_matrix = []
+    for condition, description, category, ship in zip(conds, descriptions, categories, shipping):
+        final_temp = []
+        final_temp.extend(condition)
+        final_temp.extend(description)
+        final_temp.extend(category)
+        final_temp.append(ship)
+        final_matrix.append(final_temp)
+
+    
+    print len(final_matrix)
+    print len(final_matrix[0])
+    print
+    print
+    with open("data.txt", 'a') as file_helper:
+        for example in final_matrix:
+            for val in range(len(example)):
+                file_helper.write(str(item[val]))
+                if val == len(example)-1:
+                    file_helper.write("/n")
+                else:
+                    file_helper.write(" ")
+                    
 
       
     # append condition_of_item to corresponding training example
     # Length should match the list
     #conds.append(condition_of_item)
-    print len(conds)
-    print len(descriptions)
-    print len(categories)
+    #print len(conds)
+    #print len(descriptions)
+    #print len(categories)
 
 if __name__ == "__main__":
     filename = "/mnt/c/Users/Aumit/Documents/GitHub/kaggle-mercari/train.csv"
     df, item_des, item_name, cat_name, brand_name, shipping, item_conds  = readFile(filename)
     fin_list = preProcess(item_des, item_name, df, item_name, brand_name)
-    print brand_name
+    #print brand_name
 
     #countCategories(cat_name)
 
-    #freq_words = getMostFrequentWords(fin_list)
+    freq_words = getMostFrequentWords(fin_list)
     
-    #createMatrix(freq_words, cat_name, shipping, item_conds, brand_name, fin_list)
+    createMatrix(freq_words, cat_name, shipping, item_conds, brand_name, fin_list)
    
     # Verify that puncuation was properly removed.
     #for y in range(10):
       # print fin_list[y]
 
-    print 
-    print 
-    print "Most frequent words"
+    #print 
+    #print 
+    #print "Most frequent words"
     #for terms in freq_words:
      #   print terms
 
