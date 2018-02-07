@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-
+# FEATURE EXTRACTION CLASS
 # Feature Extraction for Mercari Price Suggestion Competition 
 import matplotlib
 matplotlib.use('Agg')
@@ -142,9 +142,9 @@ def countCategories (cat_name):
         else:
             categories[item] += 1
     
-    for thing in categories:
-        print str(thing) + " ---------------------- " + str(categories[thing])
-    #print categories
+    #for thing in categories:
+     #   print str(thing) + " ---------------------- " + str(categories[thing])
+    return categories
 
 def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, item_des):
     # Conditions
@@ -198,10 +198,12 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
     # Will this just be a matrix of 1's across the diagonal?
     # Add categories to a dict, cycle through dict and add 1 if there is a match, 0 otherwise
     # To do: parse categories to create a more useful feature space
+    cats_temp = countCategories(cat_names)
+
     categories = []
     for cat in cat_names:
         cats = []
-        for cat_dupe in cat_names:
+        for cat_dupe in cats_temp:
             if cat == cat_dupe:
                 cats.append(1)
             else:
