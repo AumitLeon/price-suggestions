@@ -196,6 +196,7 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
         descriptions.append(desc_vect)
 
     # Will this just be a matrix of 1's across the diagonal?
+    # Add categories to a dict, cycle through dict and add 1 if there is a match, 0 otherwise
     # To do: parse categories to create a more useful feature space
     categories = []
     for cat in cat_names:
@@ -212,13 +213,14 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
     # Lengths verified
     # Stitch together the matrix
     final_matrix = []
-    for condition, description, category, ship in zip(conds, descriptions, categories, shipping):
+    for condition_val, description_val, category_val, ship_val in zip(conds, descriptions, categories, shipping):
         final_temp = []
-        final_temp.extend(condition)
-        final_temp.extend(description)
-        final_temp.extend(category)
-        final_temp.append(ship)
+        final_temp.extend(condition_val)
+        final_temp.extend(description_val)
+        final_temp.extend(category_val)
+        final_temp.append(ship_val)
         final_matrix.append(final_temp)
+        
 
     
     print len(final_matrix)
@@ -228,7 +230,7 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
     with open("data.txt", 'a') as file_helper:
         for example in final_matrix:
             for val in range(len(example)):
-                file_helper.write(str(item[val]))
+                file_helper.write(str(example[val]))
                 if val == len(example)-1:
                     file_helper.write("/n")
                 else:
