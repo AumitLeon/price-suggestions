@@ -225,7 +225,7 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
         
 
     
-    print len(final_matrix)
+    """print len(final_matrix)
     print len(final_matrix[0])
     print
     print
@@ -236,37 +236,7 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
                 if val == len(example)-1:
                     file_helper.write("/n")
                 else:
-                    file_helper.write(" ")
+                    file_helper.write(" ")"""
+def test (lol):
+    print lol
                     
-
-      
-    # append condition_of_item to corresponding training example
-    # Length should match the list
-    #conds.append(condition_of_item)
-    #print len(conds)
-    #print len(descriptions)
-    #print len(categories)
-
-if __name__ == "__main__":
-    filename = "/mnt/c/Users/Aumit/Documents/GitHub/kaggle-mercari/train.csv"
-    df, item_des, item_name, cat_name, brand_name, shipping, item_conds  = readFile(filename)
-    fin_list = preProcess(item_des, item_name, df, item_name, brand_name)
-    #print brand_name
-
-    #countCategories(cat_name)
-
-    freq_words = getMostFrequentWords(fin_list)
-    
-    createMatrix(freq_words, cat_name, shipping, item_conds, brand_name, fin_list)
-   
-    # Verify that puncuation was properly removed.
-    #for y in range(10):
-      # print fin_list[y]
-
-    #print 
-    #print 
-    #print "Most frequent words"
-    #for terms in freq_words:
-     #   print terms
-
-    #cleanDescriptions(item_des, item_name)
