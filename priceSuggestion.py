@@ -13,7 +13,7 @@ from keras.layers import Flatten
 from sklearn import preprocessing
 from keras import regularizers
 from keras.utils import np_utils, generic_utils
-from featureExtraction import readFile, cleanDescriptions, preProcess, getMostFrequentWords, countCategories, createMatrix, test
+from featureExtraction import readFile, cleanDescriptions, preProcess, getMostFrequentWords, countCategories, createMatrix
 invalidChars = set(string.punctuation)
 
 def create_model():
