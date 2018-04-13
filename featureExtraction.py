@@ -237,6 +237,5 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
                     file_helper.write("/n")
                 else:
                     file_helper.write(" ")"""
-def test (lol):
-    print lol
+
                     
