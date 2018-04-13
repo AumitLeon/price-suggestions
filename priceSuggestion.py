@@ -42,9 +42,11 @@ if __name__ == "__main__":
     
     examples = createMatrix(freq_words, cat_name, shipping, item_conds, brand_name, fin_list)
 
+    
+
     # Create keras model here
 
-    print "Size of matrix " + str(len(examples))
+    print ("Size of matrix " + str(len(examples)))
 
    
 
