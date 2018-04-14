@@ -86,9 +86,9 @@ if __name__ == "__main__":
 
 
     # Convert to categorical in order to produce proper output
-    y_train = keras.utils.to_categorical(training_labels, num_classes=2009)
+    y_train = keras.utils.to_categorical(training_labels, num_classes=100)
 
-    y_test = keras.utils.to_categorical(test_labels, num_classes=2009)
+    y_test = keras.utils.to_categorical(test_labels, num_classes=100)
 
     # Train the model!
     price_model.fit(training_examples, y_train, epochs=100, batch_size=15)
