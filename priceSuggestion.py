@@ -52,6 +52,10 @@ if __name__ == "__main__":
 
     print ("Size of matrix " + str(len(examples)))
 
+    # Verify the size of the vectors
+    print ("Size of vector 1: " +  str(len(examples[0])))
+    print ("Size of vector 2: " + str(len(examples[1])))  
+
    
 
 
