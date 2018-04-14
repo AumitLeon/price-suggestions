@@ -21,6 +21,7 @@ def readFile(filename):
     brand_name = df['brand_name'].tolist()
     shipping = df['shipping'].tolist()
     item_conds = df['item_condition_id'].tolist()
+    price = df['price'].tolist()
     #print item_description
 
     # Verify the lengthts of the lists
@@ -31,7 +32,7 @@ def readFile(filename):
     #print len(brand_name)
     #print len(shipping)
 
-    return df, item_description, item_name, category_name, brand_name, shipping, item_conds
+    return df, item_description, item_name, category_name, brand_name, shipping, item_conds, price
 
 """Fill in names for as descriptions for items with no descriptions. """
 def cleanDescriptions(item_descript, item_name):
@@ -146,7 +147,7 @@ def countCategories (cat_name):
      #   print str(thing) + " ---------------------- " + str(categories[thing])
     return categories
 
-def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, item_des):
+def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, item_des, price):
     # Conditions
     conds = []
     for cond in item_condition:
@@ -238,7 +239,7 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
         final_temp.append(ship_val)
         final_matrix.append(final_temp)
 
-    return final_matrix
+    return final_matrix, price
         
 
     
