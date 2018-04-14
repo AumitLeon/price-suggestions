@@ -91,7 +91,7 @@ if __name__ == "__main__":
     y_test = keras.utils.to_categorical(test_labels, num_classes=2009)
 
     # Train the model!
-    model.fit(training_examples, y_train, epochs=100, batch_size=15)
+    price_model.fit(training_examples, y_train, epochs=100, batch_size=15)
 
     print ("Creating Plots!")
     print (history_1.history.keys())
