@@ -22,7 +22,7 @@ def create_model():
     model = Sequential()
 
     # Our examples of 90 features, so input_dim = 90
-    model.add(Dense(units=100, activation='relu', input_dim=1513))
+    model.add(Dense(units=100, activation='relu', input_dim=1519))
     model.add(Dense(units=100, activation='relu', kernel_regularizer=regularizers.l2(0.00001)))
     model.add(Dense(units=100, activation='relu', kernel_regularizer=regularizers.l2(0.00001)))
     model.add(Dense(units=100, activation='relu', kernel_regularizer=regularizers.l2(0.00001)))
