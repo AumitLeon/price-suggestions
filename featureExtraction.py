@@ -147,7 +147,7 @@ def countCategories (cat_name):
      #   print str(thing) + " ---------------------- " + str(categories[thing])
     return categories
 
-def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, item_des, price):
+def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, item_des):
     # Conditions
     conds = []
     for cond in item_condition:
@@ -239,7 +239,7 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
         final_temp.append(ship_val)
         final_matrix.append(final_temp)
 
-    return final_matrix, price
+    return final_matrix
         
 
     
