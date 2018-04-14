@@ -222,6 +222,8 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
         final_temp.extend(category_val)
         final_temp.append(ship_val)
         final_matrix.append(final_temp)
+
+    return final_matrix
         
 
     
