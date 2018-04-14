@@ -183,6 +183,11 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
                     condition_of_item.append(0)
         conds.append(condition_of_item)
 
+    print ("Size of conditions matrix: " + str(len(conds)))
+    print ("Size of 1st conditions vector: " + str(len(conds[0])))
+    print ("Size of 2nd conditions vector: " + str(len(conds[1])))
+    print ()
+
     # Binarize item description
     # 1 if it term is in description, 0 otherwise
     descriptions = []
@@ -194,6 +199,11 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
             else:
                 desc_vect.append(0)
         descriptions.append(desc_vect)
+    
+    print ("Size of descriptions matrix: " + str(len(descriptions)))
+    print ("Size of 1st description vector: " + str(len(descriptions[0])))
+    print ("Size of 2nd description vector: " + str(len(descriptions[1])))
+    print()
 
     # Will this just be a matrix of 1's across the diagonal?
     # Add categories to a dict, cycle through dict and add 1 if there is a match, 0 otherwise
@@ -209,6 +219,11 @@ def createMatrix(freq_words, cat_names, shipping, item_condition, brand_names, i
             else:
                 cats.append(0)
         categories.append(cats)
+    
+    print ("Size of categories matrix: " + str(len(categories)))
+    print ("Size of 1st category vector: " + str(len(categories[0])))
+    print ("Size of 2nd category vector: " + str(len(categories[1])))
+    print()
 
 
     # Need to verify the length of all lists. Then stitch them together.
