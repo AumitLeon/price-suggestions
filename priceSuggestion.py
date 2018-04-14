@@ -31,8 +31,12 @@ def create_model():
 
 
 if __name__ == "__main__":
-    filename = "/mnt/c/Users/Aumit/Documents/GitHub/kaggle-mercari/train.csv"
+    # Local
+    #filename = "/mnt/c/Users/Aumit/Documents/GitHub/kaggle-mercari/train.csv"
+    #Server
+    filename = "../small_train.csv"
     df, item_des, item_name, cat_name, brand_name, shipping, item_conds  = readFile(filename)
+
     fin_list = preProcess(item_des, item_name, df, item_name, brand_name)
     #print brand_name
 
